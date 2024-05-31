@@ -34,5 +34,16 @@ class User {
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC) !== false;
     }
+  public function get_user_by_username($username) {
+      $db = db_connect();
+      if ($db === null) {
+          return false;
+      }
+      $statement = $db->prepare("SELECT * FROM users WHERE username = :username");
+      $statement->bindParam(':username', $username);
+      $statement->execute();
+      return $statement->fetch(PDO::FETCH_ASSOC);
+  }
+
 }
 ?>
