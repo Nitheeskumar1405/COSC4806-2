@@ -6,12 +6,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $verify_password = $_POST['verify_password'];
 
+    // Debugging output
+    echo "Username: $username<br>";
+    echo "Password: $password<br>";
+    echo "Verify Password: $verify_password<br>";
+
     if ($password === $verify_password && strlen($password) >= 10) {
         $user = new User();
         if ($user->username_exists($username)) {
             echo "Username already exists!";
         } else {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            // Debugging output
+            echo "Hashed Password: $hashed_password<br>";
             if ($user->create_user($username, $hashed_password)) {
                 echo "Account created successfully!";
                 header('Location: /login.php');
@@ -41,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="verify_password">Verify Password:</label><br>
         <input type="password" id="verify_password" name="verify_password" required><br><br>
         <input type="submit" value="Create Account">
+        <p><a href="/login.php">login</a></p>
     </form>
 </body>
 </html>

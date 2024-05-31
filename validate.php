@@ -11,6 +11,7 @@ $user_data = $user->get_user_by_username($username);
 if ($user_data && password_verify($password, $user_data['password'])) {
     $_SESSION['username'] = $username;
     $_SESSION['authenticated'] = true;
+    $_SESSION['message'] = "You have been logged in successfully.";
     header('Location: /index.php');
     exit;
 } else {
@@ -22,4 +23,3 @@ if ($user_data && password_verify($password, $user_data['password'])) {
     header('Location: /login.php');
     exit;
 }
-?>

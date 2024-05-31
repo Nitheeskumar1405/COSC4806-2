@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +17,6 @@
     </form>
     <p><a href="/signup.php">Create an account</a></p>
     <?php
-    session_start();
     if (isset($_SESSION['failed_attempts'])) {
         echo "<p>This is unsuccessful attempt number: " . $_SESSION['failed_attempts'] . "</p>";
     }
