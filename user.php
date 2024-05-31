@@ -5,7 +5,7 @@ class User {
     public function get_all_users() {
         $db = db_connect();
         if ($db === null) {
-            return [];  // Return an empty array if the database connection failed
+            return [];
         }
         $statement = $db->prepare("SELECT * FROM users;");
         $statement->execute();
@@ -13,15 +13,26 @@ class User {
         return $rows;
     }
 
-    public function create_user($user_name, $user_password) {
+    public function create_user($username, $password) {
         $db = db_connect();
         if ($db === null) {
-            return false;  // Return false if the database connection failed
+            return false;
         }
-        $statement = $db->prepare("INSERT INTO users (user_name, user_email, user_password) VALUES (:user_name, :user_password)");
-        $statement->bindParam(':user_name', $user_name);
-        $statement->bindParam(':user_password', $user_password);
+        $statement = $db->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+        $statement->bindParam(':username', $username);
+        $statement->bindParam(':password', $password);
         return $statement->execute();
+    }
+
+    public function username_exists($username) {
+        $db = db_connect();
+        if ($db === null) {
+            return false;
+        }
+        $statement = $db->prepare("SELECT * FROM users WHERE username = :username");
+        $statement->bindParam(':username', $username);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC) !== false;
     }
 }
 ?>
