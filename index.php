@@ -6,13 +6,15 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     exit;
 }
 ?>
+
+    
 <!DOCTYPE html>
 <html>
 <head>
     <title>Nash</title>
 </head>
 <body>
-    <h1>Assignment 1</h1>
+    <h1>Assignment 2</h1>
     <p>Welcome, <?= htmlspecialchars($_SESSION['username']) ?></p>
     <?php
     if (isset($_SESSION['message'])) {
@@ -27,3 +29,4 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     </footer>
 </body>
 </html>
+//i have noticed that webview is not looding the page so i have run it on visual studio code with php extension and loaded it on my local host. I have uploaded the screenshots of me testing the functions with my replit and github links. Thanks:)
